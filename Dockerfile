@@ -7,7 +7,8 @@ RUN apk update
 RUN apk add make python binutils gnupg curl
 RUN apk add upx --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community
 
-RUN npm install --no-save node-musl@0.0.6
+RUN npm init -f \
+    && npm install --no-save node-musl@0.2.2-beta6
 
 # gpg keys listed at https://github.com/nodejs/node#release-keys
 RUN for key in \
