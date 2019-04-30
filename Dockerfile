@@ -31,17 +31,17 @@ RUN for key in \
     && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz" \
     && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
     && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-    && grep " node-v$NODE_VERSION.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
-    && tar -xf "node-v$NODE_VERSION.tar.xz"
+    && grep " node-v$NODE_VERSION.tar.xz\$" SHASUMS256.txt | sha256sum -c -
 
-RUN cd "node-v$NODE_VERSION" \
+RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
+    && cd "node-v$NODE_VERSION" \
     && eval "$("../node_modules/.bin/musl-exports")" \
     && ./configure \
         --fully-static \
         --without-dtrace \
         --without-inspector \
         --without-etw \
-    && make -j$(getconf _NPROCESSORS_ONLN)
+    && make -j$(getconf _NPROCESSORS_ONLN) V=
 
 RUN upx node-v$NODE_VERSION/out/Release/node
 
