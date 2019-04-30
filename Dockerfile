@@ -1,4 +1,4 @@
-FROM node:9.5.0-alpine as builder
+FROM node:12.0.0-alpine as builder
 
 ARG version=0.0.0
 ENV NODE_VERSION=$version
