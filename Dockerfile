@@ -3,6 +3,11 @@ FROM node:12.0.0-alpine as builder
 ARG version=0.0.0
 ENV NODE_VERSION=$version
 
+ARG arch=
+ENV BUILD_ARCH=$arch
+
+COPY build.sh /
+
 RUN apk update
 RUN apk add make python binutils gnupg curl
 RUN apk add upx --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community
@@ -36,11 +41,13 @@ RUN for key in \
 RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && cd "node-v$NODE_VERSION" \
     && eval "$("../node_modules/.bin/musl-exports")" \
+    && EXTRA_OPTIONS=$(/build.sh options ${BUILD_ARCH:-""}) \
     && ./configure \
         --fully-static \
         --without-dtrace \
         --without-inspector \
         --without-etw \
+        ${EXTRA_OPTIONS} \
     && make -j$(getconf _NPROCESSORS_ONLN) V=
 
 RUN upx node-v$NODE_VERSION/out/Release/node
