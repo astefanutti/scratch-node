@@ -32,3 +32,20 @@ COPY --from=builder /app /
 
 ENTRYPOINT ["./node", "index.js"]
 ```
+
+## Build
+
+The image can be built by executing the following commands:
+
+```
+$ git clone https://github.com/astefanutti/scratch-node
+& cd scratch-node
+$ docker build --build-arg version=<nodejs_version> --build-arg arch=<target_architecture> .
+```
+
+The Node.js binary can be extracted from the images, e.g.:
+
+```
+$ docker create --name scratch-node astefanutti/scratch-node
+$ docker cp scratch-node:node .
+```
