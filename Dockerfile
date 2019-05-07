@@ -42,7 +42,7 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && cd "node-v$NODE_VERSION" \
     && eval "$("../node_modules/.bin/musl-exports")" \
     && export CXXFLAGS="-Os -ffunction-sections -fdata-sections" \
-    && export LDFLAGS="-Wl,--gc-sections" \
+    && export LDFLAGS="-Wl,--gc-sections,--strip-all" \
     && EXTRA_OPTIONS=$(/build.sh options ${BUILD_ARCH:-""}) \
     && ./configure \
         --fully-static \
