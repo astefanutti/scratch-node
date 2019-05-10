@@ -30,7 +30,7 @@ FROM astefanutti/scratch-node
 
 COPY --from=builder /app /
 
-ENTRYPOINT ["./node", "index.js"]
+ENTRYPOINT ["node", "index.js"]
 ```
 
 ## Build
@@ -47,5 +47,5 @@ The Node.js binary can be extracted from the images, e.g.:
 
 ```
 $ docker create --name scratch-node astefanutti/scratch-node
-$ docker cp scratch-node:node .
+$ docker cp scratch-node:/bin/node .
 ```

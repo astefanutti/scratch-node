@@ -58,9 +58,9 @@ FROM scratch
 
 ARG version=0.0.0
 
-COPY --from=builder node-v$version/out/Release/node /
+COPY --from=builder node-v$version/out/Release/node /bin/node
 COPY --from=builder /etc/passwd /etc/passwd
 
 USER node
 
-ENTRYPOINT ["./node"]
+ENTRYPOINT ["node"]
