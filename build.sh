@@ -11,6 +11,9 @@ target() {
         "arm32v7")
             echo "armv7-linux-musleabihf"
             ;;
+        "arm64v8")
+            echo "aarch64-linux-musl"
+            ;;
         *)
             >&2 echo Unsupported architecture: "${arch}"
             exit 1
@@ -24,7 +27,7 @@ config() {
         "x64" | "x86_64" | "amd64" | "")
             echo ""
             ;;
-        "arm32v7")
+        "arm32v7" | "arm64v8")
             echo "--with-arm-float-abi=hard --with-arm-fpu=neon"
             ;;
         *)
