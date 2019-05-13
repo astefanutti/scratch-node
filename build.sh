@@ -21,18 +21,38 @@ target() {
     esac
 }
 
-config() {
+gcc_config() {
     local arch="$1"
     case "${arch}" in
-        "x64" | "x86_64" | "amd64" | "")
+        "arm32v7")
+            echo "--with-arch=armv7-a"
+            ;;
+        "" | *)
+            echo ""
+            ;;
+    esac
+}
+
+config_mak() {
+    local arch="$1"
+    cat > $2 <<-EOF
+    TARGET=$(target ${BUILD_ARCH:-""})
+    OUTPUT=/usr/local
+    GCC_CONFIG=$(gcc_config $arch)
+	EOF
+}
+
+node_config() {
+    local arch="$1"
+    case "${arch}" in
+        "x64" | "x86_64" | "amd64")
             echo ""
             ;;
         "arm32v7" | "arm64v8")
             echo "--with-arm-float-abi=hard --with-arm-fpu=neon"
             ;;
-        *)
-            >&2 echo Unsupported architecture: "${arch}"
-            exit 1
+        "" | *)
+            echo ""
             ;;
     esac
 }

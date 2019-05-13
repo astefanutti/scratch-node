@@ -1,25 +1,24 @@
 FROM node:12.0.0-alpine as builder
 
-ARG version=0.0.0
-ENV NODE_VERSION=$version
-
-ARG arch=
-ENV BUILD_ARCH=$arch
-
-COPY build.sh config.mak /
-
 RUN apk update
 RUN apk add make g++ musl-dev python gnupg curl file
 RUN apk add upx --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community
 
+ARG arch=
+ENV BUILD_ARCH=$arch
+
+COPY build.sh /
+
 RUN curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/master.zip \
     && unzip -q musl-cross-make.zip \
     && mv musl-cross-make-master musl-cross-make \
+    && $(/build.sh config_mak ${BUILD_ARCH:-""} /musl-cross-make/config.mak) \
     && cd /musl-cross-make \
-    && cp /config.mak /musl-cross-make \
-    && TARGET=$(/build.sh target ${BUILD_ARCH:-""}) \
-       make install -j$(getconf _NPROCESSORS_ONLN) V= \
+    && make install -j$(getconf _NPROCESSORS_ONLN) V= \
     && rm -rf /musl-cross-make
+
+ARG version=0.0.0
+ENV NODE_VERSION=$version
 
 # gpg keys listed at https://github.com/nodejs/node#release-keys
 RUN for key in \
@@ -51,7 +50,7 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && export CXX=$TARGET-g++ \
     && export CXXFLAGS="-Os -ffunction-sections -fdata-sections" \
     && export LDFLAGS="-Wl,--gc-sections,--strip-all" \
-    && EXTRA_CONFIG=$(/build.sh config ${BUILD_ARCH:-""}) \
+    && EXTRA_CONFIG=$(/build.sh node_config ${BUILD_ARCH:-""}) \
     && ./configure \
         --fully-static \
         --without-dtrace \
