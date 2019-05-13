@@ -8,6 +8,9 @@ target() {
         "x64" | "x86_64" | "amd64" | "")
             echo "x86_64-linux-musl"
             ;;
+        "arm32v6")
+            echo "armv6-linux-musleabihf"
+            ;;
         "arm32v7")
             echo "armv7-linux-musleabihf"
             ;;
@@ -24,6 +27,9 @@ target() {
 gcc_config() {
     local arch="$1"
     case "${arch}" in
+        "arm32v6")
+            echo "--with-arch=armv6"
+            ;;
         "arm32v7")
             echo "--with-arch=armv7-a"
             ;;
@@ -47,6 +53,9 @@ node_config() {
     case "${arch}" in
         "x64" | "x86_64" | "amd64")
             echo ""
+            ;;
+        "arm32v6")
+            echo "--with-arm-float-abi=hard --with-arm-fpu=vfp"
             ;;
         "arm32v7" | "arm64v8")
             echo "--with-arm-float-abi=hard --with-arm-fpu=neon"
