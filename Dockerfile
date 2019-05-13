@@ -1,4 +1,4 @@
-FROM node:12.0.0-alpine as builder
+FROM alpine:3.9.4 as builder
 
 RUN apk update
 RUN apk add make g++ musl-dev python gnupg curl file
@@ -61,12 +61,14 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
 
 RUN upx node-v$NODE_VERSION/out/Release/node
 
+RUN echo 'node:x:1000:1000:Linux User,,,:/home/node:/bin/sh' > /tmp/passwd
+
 FROM scratch
 
 ARG version=0.0.0
 
 COPY --from=builder node-v$version/out/Release/node /bin/node
-COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /tmp/passwd /etc/passwd
 
 USER node
 
