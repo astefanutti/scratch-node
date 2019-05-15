@@ -13,6 +13,8 @@ Smallest, multi-architecture, Node.js binaries and Docker images (<10MB).
 
 ## Usage
 
+#### Dockerfile
+
 ```dockerfile
 FROM node as builder
 
@@ -28,6 +30,18 @@ COPY --from=builder /app /
 
 ENTRYPOINT ["node", "index.js"]
 ```
+
+#### Binary
+
+```sh
+# Linux / amd64
+$ curl -Lo node https://github.com/astefanutti/scratch-node/releases/download/bin/node-12.2.0-amd64 && chmod +x node
+
+# Linux / arm32v7
+$ curl -Lo node https://github.com/astefanutti/scratch-node/releases/download/bin/node-12.2.0-arm32v7 && chmod +x node
+```
+
+The binaries for all the supported architectures can be found at [astefanutti/scratch-node/releases/tag/bin](https://github.com/astefanutti/scratch-node/releases/tag/bin).
 
 ## Build
 

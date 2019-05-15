@@ -25,3 +25,10 @@ create-manifest: push-images
 
 push-manifest: create-manifest
 	docker manifest push --purge $(PREFIX)/scratch-node:${VERSION}
+
+extract-binaries:
+	@for arch in $(ALL_ARCHITECTURES);\
+		do docker create --name scratch-node $(PREFIX)/scratch-node:${VERSION}-$${arch} \
+		&& docker cp scratch-node:/bin/node node-${VERSION}-$${arch} \
+		&& docker container rm scratch-node \
+	; done
