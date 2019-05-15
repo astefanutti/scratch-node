@@ -1,7 +1,7 @@
 FROM alpine:3.9.4 as builder
 
 RUN apk update
-RUN apk add make g++ musl-dev python gnupg curl file
+RUN apk add make g++ python gnupg curl file
 RUN apk add upx --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 ARG arch=
