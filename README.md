@@ -1,6 +1,6 @@
 # Scratch Node.js Docker Images
 
-Smallest Node.js Docker images.
+Smallest, multi-architecture, Node.js binaries and Docker images (<10MB).
 
 ## Content
 
@@ -9,11 +9,7 @@ Smallest Node.js Docker images.
 
 ## Images
 
-* `latest`, `12`, `12.1`, `12.1.0` – 16.5 MB
-* `11`, `11.5`, `11.5.0` – 14.6 MB
-* `10`, `10.13`, `10.13.0` – 14.3 MB
-* `8`, `8.12`, `8.12.0` – 13.2 MB
-* `6`, `6.14`, `6.14.4` – 11.6 MB
+* `latest`, `12`, `12.2`, `12.2.0` – 8.41 MB
 
 ## Usage
 
