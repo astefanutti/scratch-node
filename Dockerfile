@@ -51,8 +51,10 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && export CXXFLAGS="-Os -ffunction-sections -fdata-sections" \
     && export LDFLAGS="-Wl,--gc-sections,--strip-all" \
     && EXTRA_CONFIG=$(/build.sh node_config ${BUILD_ARCH:-""}) \
+    && ln -snf libc.so /usr/local/$TARGET/lib/ld-musl-*.so.1 \
+    && ln -snf /usr/local/$TARGET/lib/ld-musl-*.so.1 /lib \
     && ./configure \
-        --fully-static \
+        --partly-static \
         --without-dtrace \
         --without-inspector \
         --without-etw \
@@ -68,6 +70,7 @@ FROM scratch
 ARG version=0.0.0
 
 COPY --from=builder node-v$version/out/Release/node /bin/node
+COPY --from=builder /lib/ld-musl-*.so.1 /lib/
 COPY --from=builder /tmp/passwd /etc/passwd
 
 USER node
