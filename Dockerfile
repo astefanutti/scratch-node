@@ -2,7 +2,6 @@ FROM alpine:3.9.4 as builder
 
 RUN apk update
 RUN apk add make g++ python gnupg curl file
-RUN apk add upx --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 ARG arch=
 ENV BUILD_ARCH=$arch
@@ -60,8 +59,6 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
         --without-etw \
         ${EXTRA_CONFIG} \
     && make -j$(getconf _NPROCESSORS_ONLN) V=
-
-RUN upx node-v$NODE_VERSION/out/Release/node
 
 RUN echo 'node:x:1000:1000:Linux User,,,:/home/node:/bin/sh' > /tmp/passwd
 

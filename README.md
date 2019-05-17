@@ -1,10 +1,10 @@
 # Scratch Node.js Docker Images
 
-Smallest Node.js Docker images (<12MB).
+Smallest Node.js Docker images.
 
 ## Content
 
-* A statically linked and compressed Node.js binary
+* A statically linked Node.js binary
 * The _musl_ dynamic linker to support native modules
 * An `/etc/passwd` entry for a `node` user
 
@@ -12,7 +12,9 @@ Smallest Node.js Docker images (<12MB).
 
 Multi-architecture images for the `amd64`, `arm32v6`, `arm32v7` and `arm64v8` architectures:
 
-* `latest`, `12`, `12.2`, `12.2.0` – 12 MB
+* `latest`, `12`, `12.2`, `12.2.0` – 12 MB / 31 MB
+
+The image sizes are - _compressed_ / _unpacked_.
 
 ## Usage
 
