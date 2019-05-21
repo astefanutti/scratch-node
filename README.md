@@ -14,6 +14,7 @@ Multi-architecture images for the `amd64`, `arm32v6`, `arm32v7` and `arm64v8` ar
 
 * `latest`, `12`, `12.2`, `12.2.0` – 12 MB / 31 MB
 * `10`, `10.15`, `10.15.3` – 11 MB / 27.6 MB
+* `8`, `8.16`, `8.16.0` – 10 MB / 25.2 MB
 
 The image sizes are - _compressed_ / _unpacked_.
 
