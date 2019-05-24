@@ -6,11 +6,11 @@ Smallest Node.js Docker images.
 
 * A statically linked Node.js binary
 * The _musl_ dynamic linker to support native modules
-* An `/etc/passwd` entry for a `node` user
+* A `/etc/passwd` entry for a `node` user
 
 ## Images
 
-Multi-architecture images for the `amd64`, `arm32v6`, `arm32v7` and `arm64v8` architectures:
+Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
 * `latest`, `12`, `12.2`, `12.2.0` – 12 MB / 31 MB
 * `10`, `10.15`, `10.15.3` – 11 MB / 27.6 MB
@@ -41,6 +41,8 @@ This can easily be achieved by updating the above example with:
 
 ```dockerfile
 FROM node:alpine as builder
+
+RUN apk update && apk add make g++ python
 
 ...
 
