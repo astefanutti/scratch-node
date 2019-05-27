@@ -8,9 +8,9 @@ ENV BUILD_ARCH=$arch
 
 COPY build.sh /
 
-RUN curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/master.zip \
+RUN curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/v0.9.8.zip \
     && unzip -q musl-cross-make.zip \
-    && mv musl-cross-make-master musl-cross-make \
+    && mv musl-cross-make-0.9.8 musl-cross-make \
     && $(/build.sh config_mak ${BUILD_ARCH:-""} /musl-cross-make/config.mak) \
     && cd /musl-cross-make \
     && make install -j$(getconf _NPROCESSORS_ONLN) V= \
