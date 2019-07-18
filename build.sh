@@ -55,7 +55,7 @@ node_config() {
     local arch="$1"
     case "${arch}" in
         "x64" | "x86_64" | "amd64")
-            echo ""
+            echo "--enable-lto"
             ;;
         "arm32v6")
             echo "--with-arm-float-abi=hard --with-arm-fpu=vfp"
