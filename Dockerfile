@@ -47,7 +47,7 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && export TARGET=$(/build.sh target ${BUILD_ARCH:-""}) \
     && export CC=$TARGET-gcc \
     && export CXX=$TARGET-g++ \
-    && export CXXFLAGS="-Os -ffunction-sections -fdata-sections" \
+    && export CXXFLAGS="-O3 -ffunction-sections -fdata-sections" \
     && export LDFLAGS="-Wl,--gc-sections,--strip-all" \
     && EXTRA_CONFIG=$(/build.sh node_config ${BUILD_ARCH:-""}) \
     && ln -snf libc.so /usr/local/$TARGET/lib/ld-musl-*.so.1 \
