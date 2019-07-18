@@ -28,10 +28,10 @@ gcc_config() {
     local arch="$1"
     case "${arch}" in
         "arm32v6")
-            echo "--with-arch=armv6"
+            echo "--with-arch=armv6+fp"
             ;;
         "arm32v7")
-            echo "--with-arch=armv7-a"
+            echo "--with-arch=armv7-a+fp"
             ;;
         "" | *)
             echo ""
@@ -42,9 +42,12 @@ gcc_config() {
 config_mak() {
     local arch="$1"
     cat > $2 <<-EOF
+    BINUTILS_VER=2.32
+    GCC_VER=8.3.0
     TARGET=$(target ${BUILD_ARCH:-""})
     OUTPUT=/usr/local
-    GCC_CONFIG=$(gcc_config $arch)
+    GCC_CONFIG=$(gcc_config $arch) --enable-languages=c,c++
+    BINUTILS_CONFIG=--enable-ld --enable-gold=default --enable-linker-build-id --enable-lto
 	EOF
 }
 
