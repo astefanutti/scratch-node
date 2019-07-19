@@ -24,6 +24,18 @@ target() {
     esac
 }
 
+ld_flags() {
+    local arch="$1"
+    case "${arch}" in
+        "arm32v6")
+            echo "-Wl,-latomic,-rpath=/usr/local/armv6-linux-musleabihf/lib"
+            ;;
+        "" | *)
+            echo ""
+            ;;
+    esac
+}
+
 gcc_config() {
     local arch="$1"
     case "${arch}" in
