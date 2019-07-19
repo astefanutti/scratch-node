@@ -60,8 +60,11 @@ node_config() {
         "arm32v6")
             echo "--with-arm-float-abi=hard --with-arm-fpu=vfp"
             ;;
-        "arm32v7" | "arm64v8")
+        "arm32v7")
             echo "--with-arm-float-abi=hard --with-arm-fpu=neon"
+            ;;
+        "arm64v8")
+            echo "--with-arm-float-abi=hard --with-arm-fpu=neon --enable-lto"
             ;;
         "" | *)
             echo ""
