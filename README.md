@@ -12,10 +12,10 @@ Smallest Node.js Docker images.
 
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
-* `latest`, `13`, `13.0`, `13.0.1` – 10.8 MB / 28 MB
-* `12`, `12.13`, `12.13.0` – 10.6 MB / 27.9 MB
-* `10`, `10.16`, `10.16.3` – 12.1 MB / 32.1 MB
-* `8`, `8.16`, `8.16.0` – 10 MB / 25.2 MB
+* `latest`, `13`, `13.1`, `13.1.0` – 13.7 MB / 35.3 MB
+* `12`, `12.14`, `12.14.0` – 13.5 MB / 35.2 MB
+* `10`, `10.18`, `10.18.0` – 12.5 MB / 32.1 MB
+* `8`, `8.17`, `8.17.0` – 11.2 MB / 30.1 MB
 
 The image sizes are - _compressed_ / _unpacked_.
 
