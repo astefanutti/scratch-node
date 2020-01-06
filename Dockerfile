@@ -54,6 +54,7 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && ln -snf /usr/local/$TARGET/lib/ld-musl-*.so.1 /lib \
     && ./configure \
         --partly-static \
+        --with-intl=small-icu \
         --without-dtrace \
         --without-inspector \
         --without-etw \
