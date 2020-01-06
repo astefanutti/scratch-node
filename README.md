@@ -37,7 +37,9 @@ COPY --from=builder /app /
 ENTRYPOINT ["node", "index.js"]
 ```
 
-Note that native modules need to be statically compiled with _musl_ to be loadable.
+### Native modules
+
+Native modules need to be statically compiled with _musl_ to be loadable.
 This can easily be achieved by updating the above example with:
 
 ```dockerfile
@@ -45,14 +47,41 @@ FROM node:alpine as builder
 
 RUN apk update && apk add make g++ python
 
-...
+WORKDIR /app
+
+COPY package.json package-lock.json index.js ./
 
 RUN LDFLAGS='-static-libgcc -static-libstdc++' npm install --build-from-source=<native_module>
 
 FROM astefanutti/scratch-node
 
-...
+COPY --from=builder /app /
+
+ENTRYPOINT ["node", "index.js"]
 ```
+
+### Internationalization
+
+The Node binaries are link against the ICU library statically, and include a subset of ICU data (typically only the English locale) to keep the images size small.
+Additional locale data can be provided if needed, so that the JS methods would work for all ICU locales. it can be made available to ICU by retrieving the locales data from the ICU sources, e.g.:
+
+```dockerfile
+FROM alpine as builder
+
+RUN apk update && apk add curl
+
+# Note the exact version of icu4c that's compatible depends on the Node version!
+RUN curl -Lsq -o icu4c-64_2-src.zip https://github.com/unicode-org/icu/releases/download/release-64-2/icu4c-64_2-src.zip \
+    && unzip -q icu4c-64_2-src.zip
+
+FROM astefanutti/scratch-node:13.1.0
+
+COPY --from=builder /icu/source/data/in/icudt64l.dat /icu/
+
+ENV NODE_ICU_DATA=/icu
+```
+
+More information can be found in the [Providing ICU data at runtime](https://nodejs.org/api/intl.html#intl_providing_icu_data_at_runtime) from the Node.js documentation.
 
 ## Build
 
