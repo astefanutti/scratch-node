@@ -1,16 +1,16 @@
 FROM alpine:3.11.2 as builder
 
 RUN apk update
-RUN apk add make g++ python gnupg curl file
+RUN apk add make g++ python gnupg curl file patch
 
 ARG arch=
 ENV BUILD_ARCH=$arch
 
 COPY build.sh /
 
-RUN curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/v0.9.8.zip \
+RUN curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/v0.9.9.zip \
     && unzip -q musl-cross-make.zip \
-    && mv musl-cross-make-0.9.8 musl-cross-make \
+    && mv musl-cross-make-0.9.9 musl-cross-make \
     && $(/build.sh config_mak ${BUILD_ARCH:-""} /musl-cross-make/config.mak) \
     && cd /musl-cross-make \
     && make install -j$(getconf _NPROCESSORS_ONLN) V= \
