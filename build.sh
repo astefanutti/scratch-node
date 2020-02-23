@@ -54,8 +54,8 @@ gcc_config() {
 config_mak() {
     local arch="$1"
     cat > $2 <<-EOF
-    BINUTILS_VER=2.32
-    GCC_VER=8.3.0
+    BINUTILS_VER=2.33.1
+    GCC_VER=9.2.0
     TARGET=$(target ${BUILD_ARCH:-""})
     OUTPUT=/usr/local
     GCC_CONFIG=$(gcc_config $arch) --enable-languages=c,c++
