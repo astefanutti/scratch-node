@@ -1,4 +1,4 @@
-FROM alpine:3.11.2 as builder
+FROM alpine:3.11.3 as builder
 
 RUN apk update
 RUN apk add make g++ python gnupg curl file patch
