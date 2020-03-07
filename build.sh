@@ -28,7 +28,7 @@ ld_flags() {
     local arch="$1"
     case "${arch}" in
         "arm32v6")
-            echo "-Wl,-latomic,-rpath=/usr/local/armv6-linux-musleabihf/lib"
+            echo "-Wl,-Bstatic,-latomic,-rpath=/usr/local/armv6-linux-musleabihf/lib"
             ;;
         "" | *)
             echo ""
