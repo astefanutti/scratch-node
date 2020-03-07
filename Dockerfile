@@ -42,14 +42,17 @@ RUN for key in \
     && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
     && grep " node-v$NODE_VERSION.tar.xz\$" SHASUMS256.txt | sha256sum -c -
 
+ADD patch.sh /
+ADD patches /patches
+
 RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && cd "node-v$NODE_VERSION" \
+    && /patch.sh ${BUILD_ARCH:-""} \
     && export TARGET=$(/build.sh target ${BUILD_ARCH:-""}) \
     && export CC=$TARGET-gcc \
     && export CXX=$TARGET-g++ \
     && export CXXFLAGS="-O3 -ffunction-sections -fdata-sections" \
     && export LDFLAGS="-Wl,--gc-sections,--strip-all $(/build.sh ld_flags ${BUILD_ARCH:-""})" \
-    && EXTRA_CONFIG=$(/build.sh node_config ${BUILD_ARCH:-""}) \
     && ln -snf libc.so /usr/local/$TARGET/lib/ld-musl-*.so.1 \
     && ln -snf /usr/local/$TARGET/lib/ld-musl-*.so.1 /lib \
     && ./configure \
@@ -59,7 +62,7 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
         --without-inspector \
         --without-etw \
         --without-intl \
-        ${EXTRA_CONFIG} \
+        $(/build.sh node_config ${BUILD_ARCH:-""}) \
     && make -j$(getconf _NPROCESSORS_ONLN) V=
 
 RUN echo 'node:x:1000:1000:Linux User,,,:/home/node:/bin/sh' > /tmp/passwd

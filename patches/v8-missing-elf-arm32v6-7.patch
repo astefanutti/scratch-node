@@ -1,0 +1,11 @@
+--- deps/v8/src/base/cpu.orig.cc	2020-03-07 14:44:14.000000000 +0100
++++ deps/v8/src/base/cpu.cc	2020-03-07 14:44:36.000000000 +0100
+@@ -17,7 +17,7 @@
+ #if V8_OS_QNX
+ #include <sys/syspage.h>  // cpuinfo
+ #endif
+-#if (V8_OS_LINUX && V8_HOST_ARCH_PPC) || V8_OS_ANDROID
++#if V8_OS_LINUX || V8_OS_ANDROID
+ #include <elf.h>
+ #endif
+ #if V8_OS_AIX
