@@ -30,6 +30,9 @@ ld_flags() {
         "arm32v6")
             echo "-Wl,-Bstatic,-latomic,-rpath=/usr/local/armv6-linux-musleabihf/lib"
             ;;
+        "arm32v7")
+            echo "-Wl,-Bstatic,-latomic,-rpath=/usr/local/armv7-linux-musleabihf/lib"
+            ;;
         "" | *)
             echo ""
             ;;
