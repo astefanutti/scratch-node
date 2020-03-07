@@ -46,7 +46,7 @@ gcc_config() {
             echo "--with-arch=armv6+fp"
             ;;
         "arm32v7")
-            echo "--with-arch=armv7-a+fp"
+            echo "--with-arch=armv7-a+neon-vfpv4"
             ;;
         "" | *)
             echo ""
