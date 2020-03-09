@@ -4,8 +4,8 @@ Smallest Node.js Docker images.
 
 ## Content
 
-* A statically linked Node.js binary
-* The _musl_ dynamic linker to support native modules
+* The Node.js binary, statically linked using [_musl_](https://musl.libc.org), with opt-in support for i18n data
+* The _musl_ dynamic linker, to support native modules
 * A `/etc/passwd` entry for a `node` user
 
 ## Images
@@ -71,12 +71,12 @@ FROM alpine as builder
 RUN apk update && apk add curl
 
 # Note the exact version of icu4c that's compatible depends on the Node version!
-RUN curl -Lsq -o icu4c-64_2-src.zip https://github.com/unicode-org/icu/releases/download/release-64-2/icu4c-64_2-src.zip \
-    && unzip -q icu4c-64_2-src.zip
+RUN curl -Lsq -o icu4c-65_1-src.zip https://github.com/unicode-org/icu/releases/download/release-65-1/icu4c-65_1-src.zip \
+    && unzip -q icu4c-65_1-src.zip
 
-FROM astefanutti/scratch-node:13.1.0
+FROM astefanutti/scratch-node:13.10.1
 
-COPY --from=builder /icu/source/data/in/icudt64l.dat /icu/
+COPY --from=builder /icu/source/data/in/icudt65l.dat /icu/
 
 ENV NODE_ICU_DATA=/icu
 ```
