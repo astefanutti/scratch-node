@@ -61,7 +61,6 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
         --without-dtrace \
         --without-inspector \
         --without-etw \
-        --without-intl \
         $(/build.sh node_config ${BUILD_ARCH:-""}) \
     && make -j$(getconf _NPROCESSORS_ONLN) V=
 
