@@ -1,7 +1,7 @@
 FROM alpine:3.11.3 as builder
 
 RUN apk update
-RUN apk add make g++ python gnupg curl file patch
+RUN apk add make g++ python3 gnupg curl file patch
 
 ARG arch=
 ENV BUILD_ARCH=$arch
