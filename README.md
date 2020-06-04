@@ -12,7 +12,7 @@ Smallest Node.js Docker images.
 
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
-* `latest`, `14`, `14.3`, `14.3.0` – 14.9 MB / 39.1 MB
+* `latest`, `14`, `14.4`, `14.4.0` – 14.9 MB / 39.1 MB
 * `13`, `13.14`, `13.14.0` – 14.8 MB / 39.0 MB
 * `12`, `12.16`, `12.16.1` – 14.4 MB / 37.5 MB
 * `10`, `10.18`, `10.18.0` – 12.5 MB / 32.1 MB
@@ -75,7 +75,7 @@ RUN apk update && apk add curl
 RUN curl -Lsq -o icu4c-67_1-src.zip https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip \
     && unzip -q icu4c-67_1-src.zip
 
-FROM astefanutti/scratch-node:14.3.0
+FROM astefanutti/scratch-node:14.4.0
 
 COPY --from=builder /icu/source/data/in/icudt67l.dat /icu/
 
