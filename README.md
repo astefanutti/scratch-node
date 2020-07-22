@@ -1,6 +1,6 @@
-# Scratch Node.js Docker Images
+# Distroless Node.js Docker Images
 
-Smallest Node.js Docker images.
+Multi-architecture distroless Node.js Docker images.
 
 ## Content
 
