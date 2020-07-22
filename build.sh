@@ -43,10 +43,10 @@ gcc_config() {
     local arch="$1"
     case "${arch}" in
         "arm32v6")
-            echo "--with-arch=armv6+fp"
+            echo "--with-arch=armv6zk+fp --with-tune=arm1176jzf-s"
             ;;
         "arm32v7")
-            echo "--with-arch=armv7-a+neon-vfpv4"
+            echo "--with-arch=armv7-a+neon-vfpv4 --with-tune=generic-armv7-a"
             ;;
         "" | *)
             echo ""
