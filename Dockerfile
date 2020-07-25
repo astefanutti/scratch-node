@@ -47,7 +47,7 @@ ADD patches /patches
 
 RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && cd "node-v$NODE_VERSION" \
-    && /patch.sh ${BUILD_ARCH:-""} \
+    && /patch.sh ${BUILD_ARCH} ${NODE_VERSION} \
     && export TARGET=$(/build.sh target ${BUILD_ARCH:-""}) \
     && export CC=$TARGET-gcc \
     && export CXX=$TARGET-g++ \
