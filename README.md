@@ -12,7 +12,7 @@ Multi-architecture distroless Node.js Docker images.
 
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
-* `latest`, `14`, `14.8`, `14.8.0` – 15.2 MB / 40.8 MB
+* `latest`, `14`, `14.9`, `14.9.0` – 15.2 MB / 40.9 MB
 * `13`, `13.14`, `13.14.0` – 14.8 MB / 39.0 MB
 * `12`, `12.18`, `12.18.3` – 14.6 MB / 39.0 MB
 * `10`, `10.22`, `10.22.0` – 13.3 MB / 34.1 MB
@@ -75,7 +75,7 @@ RUN apk update && apk add curl
 RUN curl -Lsq -o icu4c-67_1-src.zip https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip \
     && unzip -q icu4c-67_1-src.zip
 
-FROM astefanutti/scratch-node:14.8.0
+FROM astefanutti/scratch-node:14.9.0
 
 COPY --from=builder /icu/source/data/in/icudt67l.dat /icu/
 

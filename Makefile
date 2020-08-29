@@ -1,5 +1,5 @@
 PREFIX?=astefanutti
-VERSION?=14.8.0
+VERSION?=14.9.0
 
 # This option is for running docker manifest command
 export DOCKER_CLI_EXPERIMENTAL := enabled
