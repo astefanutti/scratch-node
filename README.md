@@ -18,7 +18,11 @@ Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 * `10`, `10.22`, `10.22.0` – 13.3 MB / 34.1 MB
 * `8`, `8.17`, `8.17.0` – 11.2 MB / 30.1 MB
 
-The image sizes are - _compressed_ / _unpacked_.
+The image sizes are _compressed_ / _unpacked_.
+They are published to the following repositories:
+* [docker.io/astefanutti/scratch-node](https://hub.docker.com/r/astefanutti/scratch-node)
+* [ghcr.io/astefanutti/scratch-node](https://github.com/users/astefanutti/packages/container/scratch-node)
+* [quay.io/astefanutti/scratch-node](https://quay.io/repository/astefanutti/scratch-node)
 
 ## Usage
 
