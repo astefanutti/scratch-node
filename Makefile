@@ -1,6 +1,6 @@
 PREFIX?=astefanutti
 REPOSITORIES?=quay.io/$(PREFIX) ghcr.io/$(PREFIX)
-VERSION?=15.14.0
+VERSION?=16.0.0
 
 # This option is for running docker manifest command
 export DOCKER_CLI_EXPERIMENTAL := enabled
