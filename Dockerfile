@@ -1,16 +1,16 @@
-FROM alpine:3.12.3 as builder
+FROM alpine:3.13.5 as builder
 
 RUN apk update
-RUN apk add make g++ python2 python3 gnupg curl file patch
+RUN apk add make g++ python2 python3 gnupg curl file flex patch rsync
 
 ARG arch=
 ENV BUILD_ARCH=$arch
 
 COPY build.sh /
 
-RUN curl -Lsq -o musl-cross-make.zip https://github.com/richfelker/musl-cross-make/archive/v0.9.9.zip \
+RUN curl -Lsq -o musl-cross-make.zip https://git.zv.io/toolchains/musl-cross-make/-/archive/d56af530b961d39c8c76bdecb7ce2d48b265da7f/musl-cross-make-d56af530b961d39c8c76bdecb7ce2d48b265da7f.zip \
     && unzip -q musl-cross-make.zip \
-    && mv musl-cross-make-0.9.9 musl-cross-make \
+    && mv musl-cross-make-d56af530b961d39c8c76bdecb7ce2d48b265da7f musl-cross-make \
     && $(/build.sh config_mak ${BUILD_ARCH:-""} /musl-cross-make/config.mak) \
     && cd /musl-cross-make \
     && make install -j$(getconf _NPROCESSORS_ONLN) V= \
@@ -52,6 +52,8 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
     && export CC=$TARGET-gcc \
     && export CXX=$TARGET-g++ \
     && export AR=$TARGET-ar \
+    && export NM=$TARGET-nm \
+    && export RANLIB=$TARGET-ranlib \
     && export LINK=$TARGET-g++ \
     && export CXXFLAGS="-O3 -ffunction-sections -fdata-sections" \
     && export LDFLAGS="-Wl,--gc-sections,--strip-all $(/build.sh ld_flags ${BUILD_ARCH:-""})" \

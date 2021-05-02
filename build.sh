@@ -57,12 +57,17 @@ gcc_config() {
 config_mak() {
     local arch="$1"
     cat > $2 <<-EOF
-    BINUTILS_VER=2.33.1
-    GCC_VER=9.2.0
+    CONFIG_SUB_REV = 888c8e3d5f7b
+    GCC_VER = 10-20210227
+    BINUTILS_VER = 2.36.1
+    GMP_VER = 6.2.1
+    MPC_VER = 1.2.1
+    MPFR_VER = 4.1.0
+    LINUX_VER = 5.4.100
     TARGET=$(target ${BUILD_ARCH:-""})
     OUTPUT=/usr/local
     GCC_CONFIG=$(gcc_config $arch) --enable-languages=c,c++
-    BINUTILS_CONFIG=--enable-ld --enable-gold=default --enable-linker-build-id --enable-lto
+    BINUTILS_CONFIG=--enable-gold --enable-lto
 	EOF
 }
 
