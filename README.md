@@ -12,7 +12,7 @@ Multi-architecture distroless Node.js Docker images.
 
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
-* `latest`, `15`, `15.6`, `15.6.0` – 16.3 MB / 44.4 MB <sup name="a1">[1](#f1)</sup>
+* `latest`, `15`, `15.14`, `15.14.0` – 16.7 MB / 42.7 MB
 * `14`, `14.14`, `14.14.0` – 15.3 MB / 41.0 MB
 * `13`, `13.14`, `13.14.0` – 14.8 MB / 39.0 MB
 * `12`, `12.18`, `12.18.3` – 14.6 MB / 39.0 MB
@@ -80,7 +80,7 @@ RUN apk update && apk add curl
 RUN curl -Lsq -o icu4c-68_1-src.zip https://github.com/unicode-org/icu/releases/download/release-68-1/icu4c-68_1-src.zip \
     && unzip -q icu4c-68_1-src.zip
 
-FROM astefanutti/scratch-node:15.6.0
+FROM astefanutti/scratch-node:15.14.0
 
 COPY --from=builder /icu/source/data/in/icudt68l.dat /icu/
 
@@ -93,12 +93,8 @@ More information can be found in the [Providing ICU data at runtime](https://nod
 
 The image can be built by executing the following commands:
 
-```
+```console
 $ git clone https://github.com/astefanutti/scratch-node
-& cd scratch-node
+$ cd scratch-node
 $ docker build --build-arg version=<nodejs_version> --build-arg arch=<target_architecture> .
 ```
-
----
-
-<a name="f1">1</a>. Link Time Optimization (LTO) has been disabled because of [nodejs/node#35957](https://github.com/nodejs/node/issues/35957). [↩](#a1)
