@@ -1,7 +1,7 @@
 --- tools/v8_gypfiles/v8.gyp
 +++ tools/v8_gypfiles/v8.gyp
-@@ -1368,9 +1368,14 @@
-     },  # cppgc_base
+@@ -1608,9 +1608,9 @@
+     },  # v8_bigint
      {
        'target_name': 'v8_cppgc_shared',
 -      'type': 'none',
@@ -9,15 +9,10 @@
        'toolsets': ['host', 'target'],
 -      'direct_dependent_settings': {
 +      # 'direct_dependent_settings': {
-+        'conditions': [
-+          ['enable_lto=="true"', {
-+            'cflags_cc': [ '-fno-lto' ],
-+          }],
-+        ],
          'sources': [
            '<(V8_ROOT)/src/heap/base/stack.cc',
            '<(V8_ROOT)/src/heap/base/stack.h',
-@@ -1447,7 +1452,7 @@
+@@ -1690,7 +1690,7 @@
              ],
            }],
          ],

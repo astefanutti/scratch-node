@@ -12,7 +12,7 @@ apply() {
                 patch -p0 < /patches/v8-missing-elf-arm32v6-7.patch
             fi
             ;;
-        15.*.* | 16.*.*)
+        15.*.* | 16.*.* | 17.*.*)
             patch -p0 < /patches/v8-cppgc-shared-no-lto.patch
             ;;
         *)
