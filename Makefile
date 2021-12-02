@@ -1,6 +1,6 @@
 PREFIX?=astefanutti
 REPOSITORIES?=quay.io/$(PREFIX) ghcr.io/$(PREFIX)
-VERSION?=17.0.1
+VERSION?=17.2.0
 
 # This option is for running docker manifest command
 export DOCKER_CLI_EXPERIMENTAL := enabled
@@ -18,7 +18,7 @@ move-images:
 	done
 
 build-images:
-	@for arch in $(ARCHITECTURES); do docker build --build-arg version=${VERSION} --build-arg arch=$${arch} -t $(PREFIX)/scratch-node:${VERSION}-$${arch} .; done
+	@for arch in $(ARCHITECTURES); do docker build --progress=auto --build-arg version=${VERSION} --build-arg arch=$${arch} -t $(PREFIX)/scratch-node:${VERSION}-$${arch} .; done
 
 push-images:
 	@for arch in $(ARCHITECTURES); do docker push $(PREFIX)/scratch-node:${VERSION}-$${arch}; done
