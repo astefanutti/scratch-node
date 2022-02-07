@@ -10,6 +10,8 @@ on:
   
 jobs:
   build-images:
+    name: 🐳 Build Images
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [amd64, arm32v6, arm32v7, arm64v8]
