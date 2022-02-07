@@ -2,7 +2,7 @@ name: Build Images
 
 on:
   push:
-    branches: [main]
+    branches: [main, curl-test]
     paths:
       - "Dockerfile"
       - "build.sh"
@@ -24,3 +24,4 @@ jobs:
         run: |
           docker build --build-arg version=${{ matrix.node-version }} --build-arg ${{ matrix.architecture }} .
           docker images
+        working-directory: ./curl-test
