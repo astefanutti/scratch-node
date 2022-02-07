@@ -20,9 +20,8 @@ jobs:
       - name: 🏁 Checkout repo
         uses: actions/checkout@v2
 
-      - name: 🐳 Build Images
+      - name: 🐳 Build Image with Node v${{ matrix.node-version }} on ${{ matrix.architecture }}
         run: |
-          echo ${{ matrix.node-version }}
           docker build --build-arg version=${{ matrix.node-version }} --build-arg ${{ matrix.architecture }} .
           docker images
         working-directory: ./curl-test
