@@ -1,7 +1,7 @@
 FROM alpine:3.13.5 as builder
 
 RUN apk update
-RUN apk add make g++ python2 python3 gnupg curl file flex patch rsync
+RUN apk add make g++ python2 python3 gnupg curl file flex patch rsync wget
 
 ARG arch=
 ENV BUILD_ARCH=$arch
@@ -69,6 +69,10 @@ RUN tar -xf "node-v$NODE_VERSION.tar.xz" \
 
 RUN echo 'node:x:1000:1000:Linux User,,,:/home/node:/bin/sh' > /tmp/passwd
 
+# Install dumb-init
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64
+RUN chmod +x /usr/local/bin/dumb-init
+
 FROM scratch
 
 ARG version=0.0.0
@@ -78,7 +82,8 @@ LABEL org.opencontainers.image.source="https://github.com/astefanutti/scratch-no
 COPY --from=builder node-v$version/out/Release/node /bin/node
 COPY --from=builder /lib/ld-musl-*.so.1 /lib/
 COPY --from=builder /tmp/passwd /etc/passwd
+COPY --from=builder /usr/local/bin/dumb-init /usr/local/bin/dumb-init
 
 USER node
 
-ENTRYPOINT ["node"]
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]

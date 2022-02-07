@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [amd64, arm32v6, arm32v7, arm64v8]
-        architecture: [16.12.0, 15.14.0, 14.17.0, 13.14.0, 12.22.1, 10.22.0, 8.17.0]
+        node-version: [amd64]
+        architecture: [16.12.0]
     steps:
       - name: 🏁 Checkout repo
         uses: actions/checkout@v2
