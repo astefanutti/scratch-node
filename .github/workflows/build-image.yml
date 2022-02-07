@@ -1,0 +1,24 @@
+name: Build Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Dockerfile"
+      - "build.sh"
+      - ".github/workflows/build-image.yml" # this file
+  
+jobs:
+  build-images:
+    strategy:
+      matrix:
+        node-version: [amd64, arm32v6, arm32v7, arm64v8]
+        architecture: [16.12.0, 15.14.0, 14.17.0, 13.14.0, 12.22.1, 10.22.0, 8.17.0]
+    steps:
+      - name: 🏁 Checkout repo
+        uses: actions/checkout@v2
+
+      - name: 🐳 Build Images
+        run: |
+          docker build --build-arg version=${{ matrix.node-version }} --build-arg ${{ matrix.architecture }} .
+          docker images
