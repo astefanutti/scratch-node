@@ -1,16 +1,16 @@
-FROM alpine:3.13.5 as builder
+FROM alpine:3.14.4 as builder
 
 RUN apk update
-RUN apk add make g++ python2 python3 gnupg curl file flex patch rsync
+RUN apk add make g++ python2 python3 gnupg curl file flex patch rsync texinfo
 
 ARG arch=
 ENV BUILD_ARCH=$arch
 
 COPY build.sh /
 
-RUN curl -Lsq -o musl-cross-make.zip https://git.zv.io/toolchains/musl-cross-make/-/archive/d56af530b961d39c8c76bdecb7ce2d48b265da7f/musl-cross-make-d56af530b961d39c8c76bdecb7ce2d48b265da7f.zip \
+RUN curl -Lsq -o musl-cross-make.zip https://git.zv.io/toolchains/musl-cross-make/-/archive/53280e53a32202a0ee874911fc52005874db344b/musl-cross-make-53280e53a32202a0ee874911fc52005874db344b.zip \
     && unzip -q musl-cross-make.zip \
-    && mv musl-cross-make-d56af530b961d39c8c76bdecb7ce2d48b265da7f musl-cross-make \
+    && mv musl-cross-make-53280e53a32202a0ee874911fc52005874db344b musl-cross-make \
     && $(/build.sh config_mak ${BUILD_ARCH:-""} /musl-cross-make/config.mak) \
     && cd /musl-cross-make \
     && make install -j$(getconf _NPROCESSORS_ONLN) V= \
