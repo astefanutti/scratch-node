@@ -12,7 +12,7 @@ Multi-architecture distroless Node.js Docker images.
 
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
-* `latest`, `17`, `17.2`, `17.2.0` – 17.8 MB / 46.3 MB
+* `latest`, `17`, `17.7`, `17.7.2` – 17.9 MB / 46.4 MB
 * `16`, `16.12`, `16.12.0` – 17.1 MB / 43.5 MB
 * `15`, `15.14`, `15.14.0` – 16.7 MB / 42.7 MB
 * `14`, `14.17`, `14.17.0` – 15.9 MB / 41.7 MB
@@ -70,8 +70,9 @@ ENTRYPOINT ["node", "index.js"]
 
 ### Internationalization
 
-The Node binaries are link against the ICU library statically, and include a subset of ICU data (typically only the English locale) to keep the images size small.
-Additional locale data can be provided if needed, so that the JS methods would work for all ICU locales. it can be made available to ICU by retrieving the locales data from the ICU sources, e.g.:
+The Node binaries are linked against the ICU library statically, and include a subset of ICU data (typically only the English locale) to keep the image sizes small.
+Additional locales data can be provided if needed, so that methods work for all ICU locales.
+It can be made available to ICU by retrieving the locales data from the ICU sources, e.g.:
 
 ```dockerfile
 FROM alpine as builder
@@ -82,7 +83,7 @@ RUN apk update && apk add curl
 RUN curl -Lsq -o icu4c-70_1-src.zip https://github.com/unicode-org/icu/releases/download/release-70-1/icu4c-70_1-src.zip \
     && unzip -q icu4c-70_1-src.zip
 
-FROM astefanutti/scratch-node:17.2.0
+FROM astefanutti/scratch-node:17.7.2
 
 COPY --from=builder /icu/source/data/in/icudt70l.dat /icu/
 
