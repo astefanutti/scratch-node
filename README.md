@@ -13,7 +13,7 @@ Multi-architecture distroless Node.js Docker images.
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
 * `latest`, `17`, `17.7`, `17.7.2` – 17.9 MB / 46.4 MB
-* `16`, `16.12`, `16.12.0` – 17.1 MB / 43.5 MB
+* `16`, `16.14`, `16.14.2` – 17.1 MB / 43.0 MB
 * `15`, `15.14`, `15.14.0` – 16.7 MB / 42.7 MB
 * `14`, `14.17`, `14.17.0` – 15.9 MB / 41.7 MB
 * `13`, `13.14`, `13.14.0` – 14.8 MB / 39.0 MB
