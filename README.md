@@ -12,7 +12,8 @@ Multi-architecture distroless Node.js Docker images.
 
 Multi-architecture images for `amd64`, `arm32v6`, `arm32v7` and `arm64v8`:
 
-* `latest`, `17`, `17.7`, `17.7.2` – 17.9 MB / 46.4 MB
+* `latest`, `18`, `18.10`, `18.10.0` – 18.7 MB / 47.5 MB
+* `17`, `17.7`, `17.7.2` – 17.9 MB / 46.4 MB
 * `16`, `16.14`, `16.14.2` – 17.1 MB / 43.0 MB
 * `15`, `15.14`, `15.14.0` – 16.7 MB / 42.7 MB
 * `14`, `14.17`, `14.17.0` – 15.9 MB / 41.7 MB
@@ -80,12 +81,12 @@ FROM alpine as builder
 RUN apk update && apk add curl
 
 # Note the exact version of icu4c that's compatible depends on the Node version!
-RUN curl -Lsq -o icu4c-70_1-src.zip https://github.com/unicode-org/icu/releases/download/release-70-1/icu4c-70_1-src.zip \
-    && unzip -q icu4c-70_1-src.zip
+RUN curl -Lsq -o icu4c-71_1-src.zip https://github.com/unicode-org/icu/releases/download/release-71-1/icu4c-71_1-src.zip \
+    && unzip -q icu4c-71_1-src.zip
 
-FROM astefanutti/scratch-node:17.7.2
+FROM astefanutti/scratch-node:18.10.0
 
-COPY --from=builder /icu/source/data/in/icudt70l.dat /icu/
+COPY --from=builder /icu/source/data/in/icudt71l.dat /icu/
 
 ENV NODE_ICU_DATA=/icu
 ```
