@@ -1,23 +1,23 @@
 --- tools/v8_gypfiles/v8.gyp
 +++ tools/v8_gypfiles/v8.gyp
-@@ -1608,9 +1608,9 @@
+@@ -1592,9 +1592,9 @@
      },  # v8_bigint
      {
-       'target_name': 'v8_cppgc_shared',
+       'target_name': 'v8_heap_base',
 -      'type': 'none',
 +      'type': 'static_library',
        'toolsets': ['host', 'target'],
 -      'direct_dependent_settings': {
 +      # 'direct_dependent_settings': {
          'sources': [
+           '<(V8_ROOT)/src/heap/base/active-system-pages.cc',
            '<(V8_ROOT)/src/heap/base/stack.cc',
-           '<(V8_ROOT)/src/heap/base/stack.h',
-@@ -1690,7 +1690,7 @@
+@@ -1678,7 +1678,7 @@
              ],
            }],
          ],
 -      },
 +      # },
-     },  # v8_cppgc_shared
+     },  # v8_heap_base
  
      ###############################################################################
