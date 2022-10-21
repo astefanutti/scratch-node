@@ -1,7 +1,7 @@
-FROM alpine:3.14.4 as builder
+FROM alpine:3.16.2 as builder
 
 RUN apk update
-RUN apk add make g++ python2 python3 gnupg curl file flex patch rsync texinfo
+RUN apk add make g++ python3 gnupg curl file flex patch rsync texinfo
 
 ARG arch=
 ENV BUILD_ARCH=$arch
