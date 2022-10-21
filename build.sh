@@ -57,9 +57,9 @@ gcc_config() {
 config_mak() {
     local arch="$1"
     cat > $2 <<-EOF
-    MUSL_VER = 1.2.2
-    GCC_VER = 11-20211120
-    BINUTILS_VER = 2.37
+    MUSL_VER = 1.2.3
+    GCC_VER = 11.3.0
+    BINUTILS_VER = 2.38
     GMP_VER = 6.2.1
     MPC_VER = 1.2.1
     MPFR_VER = 4.1.0
